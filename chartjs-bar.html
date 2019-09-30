@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="style.css">
+    <title>BAR CHART</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+</head>
+
+<body>
+<H1> Evolución tasa de desocupación a nivel país segun sexo </H1>
+    <nav>
+        <a href="index.html">Index</a> <a href="chartjs-line.html">Line chart</a> <a href="chartjs-bar.html" class="actual">Bar chart</a> <a href="chartjs-radar.html">Doughnut chart</a> <a href="c3js-line.html">Line Chart</a> <a href="d3plus-treemap.html">Treemap</a>
+    </nav>
+
+    <canvas id="chart"></canvas>
+
+    <script>
+        var data;
+        var meses = ['Jun-Ago 2018','Jul-Sep 2018', 'Ago-Oct 2018', 'Sep-Nov 2018', 'Nov-Ene 2019', 'Dic-Feb 2019', 'Ene-Mar 2019', 'Feb-Abr 2019', 'Mar-May 2019', 'Abr-Jun 2019', 'May-Jul 2019', 'Jun-Ago 2019'];
+        var hombre = [7, 6.8, 6.9, 6.5, 6.2, 6.2, 6.0, 6.1, 6.0, 6.3, 6.7, 6.8, 7];
+        var mujer = [7.3, 7.1, 7.1, 6.8, 6.7, 6.8, 6,7, 6.9, 6.9, 7.1, 7.1, 7.2, 7.2];
+
+        function setup() {
+            //relleno unos arreglos []
+            noCanvas();
+
+            //creo el gráfico con chart.js dentro del setup de p5.js
+            new Chart(document.getElementById('chart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: meses,
+                    datasets: [{
+                        label: 'Hombres',
+                        backgroundColor: 'rgb(179, 141, 151)',
+                        data: hombre,
+                    }, {
+                        label: 'Mujeres',
+                        backgroundColor: 'rgb(213, 172, 169)',
+                        data: mujer
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Evaluación tasa desocupación según sexo'
+                    },
+                    legend: {
+                        position: 'bottom'
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                callback: function(value, index, values) {
+                                    return value;
+                                }
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="style.css">
+    <title>TREEMAP</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://d3plus.org/js/d3plus-hierarchy.v0.8.full.min.js"></script>
+</head>
+
+<body>
+  <H1> Tasa de Ocupación Informal -Freelance- por Regiones  </H1>
+
+    <nav>
+        <a href="index.html">Index</a> <a href="chartjs-line.html">Line chart</a> <a href="chartjs-bar.html">Bar chart</a> <a href="chartjs-radar.html">Doughnut chart</a> <a href="c3js-line.html">Line Chart</a> <a href="d3plus-treemap.html" class="actual">Treemap</a>
+    </nav>
+
+    <div id="chart"></div>
+
+    <script>
+        d3.json("https://api.myjson.com/bins/182ufh").then(function(dataset) {
+            new d3plus.Treemap().data(dataset).groupBy("Region").select("#chart").sum("Cantidad").render()
+        })
+    </script>
+</body>
+
+</html>

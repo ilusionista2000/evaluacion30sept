@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="style.css">
+    <title>DOUGHNUT CHART</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+</head>
+
+<body>
+  <H1> Ingresos brutos mensuales por tramos al 5to año de Egresados de Diseño Gráfico (en pesos a septiembre de 2018)  </H1>
+
+    <nav>
+        <a href="index.html">Index</a> <a href="chartjs-line.html">Line chart</a> <a href="chartjs-bar.html">Bar chart</a> <a href="chartjs-radar.html" class="actual">Doughnut chart</a> <a href="c3js-line.html">Line Chart</a> <a href="d3plus-treemap.html">Treemap</a>
+    </nav>
+
+    <canvas id="chart"></canvas>
+
+    <script>
+        var w = document.body.offsetWidth;
+
+        var sel;
+
+        function setup() {
+            noCanvas();
+            sel = createSelect();
+            sel.position(w - 250, 18);
+            sel.option('Percentil Superior', 0);
+            sel.option('Percentil Inferior', 1);
+            sel.changed(opciones);
+            superior();
+        }
+
+        function opciones() {
+            clear();
+            if (sel.value() == 0) {
+                superior();
+            } else {
+                inferior();
+            }
+        }
+
+        function superior() {
+            new Chart (document.getElementById('chart').getContext('2d'), {
+                type: 'doughnut',
+                data:{
+                    labels: ["10% Superior", "25% Superior", "Percentil 50"],
+                        datasets: [{
+                        label: "Percentil Superior",
+                        backgroundColor: ['rgba(179, 141, 151)', 'rgba(213, 172, 169)', 'rgba(235, 207, 178)'],
+                        data: [1.4, 1.1, 0.8],
+                    }],
+                  },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Ingreso, Cantidad en Millones'
+                    },
+                    legend: {
+                        position: 'bottom'
+                    },
+
+                }
+            });
+        }
+
+        function inferior() {
+            new Chart (document.getElementById('chart').getContext('2d'), {
+                type: 'doughnut',
+                data:{
+                    labels: ["10% Inferior", "25% Inferior", "Percentil 50"],
+                        datasets: [{
+                        label: "Percentil Inferior",
+                        backgroundColor: ['rgba(179, 141, 151)', 'rgba(213, 172, 169)', 'rgba(235, 207, 178)'],
+                        data: [0.36, 0.64, 0.8],
+                    }],
+                  },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Ingreso, Cantidad en Millones'
+                    },
+                    legend: {
+                        position: 'bottom'
+                    },
+
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>
